@@ -522,7 +522,7 @@ public class SweetHome3D extends HomeApplication {
   }
 
   /**
-   * Adds a listener to new home to close it if an other one is opened.
+   * Adds a listener to new home to close it if another one is opened.
    */
   private void addNewHomeCloseListener(final Home home, final HomeController controller) {
     if (home.getName() == null) {
