@@ -379,13 +379,7 @@ public class HomePrintableComponent extends JComponent implements Printable {
         && planView != null 
         && (homePrint == null || homePrint.isPlanPrinted())) {
       // Try to print next plan view page
-      int pageIndex = page - this.furniturePageCount;
-      Level selectedLevel = this.home.getSelectedLevel();
-      if (pageIndex < this.home.getLevels().size()) {
-        this.home.setSelectedLevel(this.home.getLevels().get(pageIndex));
-        pageExists = ((Printable)planView).print(g2D, pageFormat, 0);
-      }
-      this.home.setSelectedLevel(selectedLevel);
+      pageExists = ((Printable)planView).print(g2D, pageFormat, page - this.furniturePageCount);
 
       if (pageExists == PAGE_EXISTS
           && !this.printablePages.contains(page)) {
