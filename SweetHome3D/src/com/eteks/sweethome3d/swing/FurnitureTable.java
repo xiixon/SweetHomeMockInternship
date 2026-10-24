@@ -773,12 +773,35 @@ public class FurnitureTable extends JTable implements View, Printable {
             return rendererComponent;
           }
         };
-      // Change printable column cell renderer 
+      // Change printable column cell renderer
       printableColumn.setCellRenderer(printableCellRenderer);
       // Change printable column header renderer
       printableColumn.setHeaderRenderer(printableHeaderRenderer);
       printableColumnModel.addColumn(printableColumn);
-    }    
+    }
+
+    // Create a level column from existing table column
+    TableColumn LevelColumn = new TableColumn();
+    final TableCellRenderer LevelRenderer = ((FurnitureTableColumnModel)columnModel).getLevelRenderer();
+    LevelColumn.setIdentifier(HomePieceOfFurniture.SortableProperty.LEVEL);
+    LevelColumn.setHeaderValue("Level");
+    TableCellRenderer LevelCellRenderer = new TableCellRenderer() {
+      public Component getTableCellRendererComponent(JTable table, Object value,
+                                                     boolean isSelected, boolean hasFocus, int row, int column) {
+        // Delegate rendering to existing cell renderer
+        Component rendererComponent = LevelRenderer.getTableCellRendererComponent(table, value,
+                isSelected, hasFocus, row, column);
+        rendererComponent.setBackground(Color.WHITE);
+        rendererComponent.setForeground(Color.BLACK);
+        return rendererComponent;
+      }
+    };
+    // Change level column cell renderer
+    LevelColumn.setCellRenderer(LevelCellRenderer);
+    // Change level column header renderer
+    LevelColumn.setHeaderRenderer(printableHeaderRenderer);
+    printableColumnModel.addColumn(LevelColumn);
+
     return print(g, pageFormat, pageIndex, printableColumnModel, Color.BLACK);
   }
 
@@ -1013,6 +1036,7 @@ public class FurnitureTable extends JTable implements View, Printable {
       addLanguageListener(preferences);
       updateModelColumns(home.getFurnitureVisibleProperties());
     }
+
 
     /**
      * Creates the list of available columns from furniture sortable properties.

@@ -649,7 +649,7 @@ public class Home implements Serializable, Cloneable {
   
   /**
    * Sets the selected level in home and notifies listeners of the change.
-   * @param level  the level to select
+   * @param selectedLevel  the level to select
    * @since 3.4
    */
   public void setSelectedLevel(Level selectedLevel) {
